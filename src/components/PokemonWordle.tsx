@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { gen1Pokemon, Pokemon } from '../data/pokemon';
 import './PokemonWordle.css';
 
@@ -52,10 +52,51 @@ export const PokemonWordle = () => {
   const [gameOver, setGameOver] = useState(false);
   const [message, setMessage] = useState('');
   const [showImage, setShowImage] = useState(false);
+  const [suggestions, setSuggestions] = useState<Pokemon[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const suggestionsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * gen1Pokemon.length);
     setTargetPokemon(gen1Pokemon[randomIndex]);
+  }, []);
+
+  // Handle input changes and update suggestions
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.toLowerCase();
+    setCurrentGuess(value);
+    
+    if (value.length > 0) {
+      const matches = gen1Pokemon
+        .filter(pokemon => 
+          pokemon.name.toLowerCase().includes(value) &&
+          !guesses.some(guess => guess.name === pokemon.name)
+        )
+        .slice(0, 5); // Show only top 5 matches
+      setSuggestions(matches);
+      setShowSuggestions(true);
+    } else {
+      setSuggestions([]);
+      setShowSuggestions(false);
+    }
+  };
+
+  // Handle suggestion click
+  const handleSuggestionClick = (pokemon: Pokemon) => {
+    setCurrentGuess(pokemon.name);
+    setShowSuggestions(false);
+  };
+
+  // Handle clicks outside suggestions
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (suggestionsRef.current && !suggestionsRef.current.contains(event.target as Node)) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const handleKeyPress = (event: KeyboardEvent) => {
@@ -73,6 +114,7 @@ export const PokemonWordle = () => {
       setGuesses([...guesses, guessedPokemon]);
       setCurrentGuess('');
       setMessage('');
+      setShowSuggestions(false);
 
       if (guess === targetPokemon?.name) {
         setGameOver(true);
@@ -147,13 +189,33 @@ export const PokemonWordle = () => {
             ) : (
               <div className="guess-cell empty">
                 {rowIndex === guesses.length ? (
-                  <input
-                    type="text"
-                    value={currentGuess}
-                    onChange={(e) => setCurrentGuess(e.target.value.toLowerCase())}
-                    placeholder="Type a Pokemon name..."
-                    autoFocus
-                  />
+                  <div className="input-container">
+                    <input
+                      type="text"
+                      value={currentGuess}
+                      onChange={handleInputChange}
+                      placeholder="Type a Pokemon name..."
+                      autoFocus
+                    />
+                    {showSuggestions && suggestions.length > 0 && (
+                      <div className="suggestions-dropdown" ref={suggestionsRef}>
+                        {suggestions.map(pokemon => (
+                          <div
+                            key={pokemon.id}
+                            className="suggestion-item"
+                            onClick={() => handleSuggestionClick(pokemon)}
+                          >
+                            <img 
+                              src={getPokemonImageUrl(pokemon.id)} 
+                              alt={pokemon.name}
+                              className="suggestion-image"
+                            />
+                            <span className="suggestion-name">{pokemon.name}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ) : (
                   <div className="empty-cell">?</div>
                 )}
@@ -186,6 +248,8 @@ export const PokemonWordle = () => {
             setGameOver(false);
             setMessage('');
             setShowImage(false);
+            setSuggestions([]);
+            setShowSuggestions(false);
           }}
         >
           Play Again
