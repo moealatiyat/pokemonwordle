@@ -1,54 +1,60 @@
-# React + TypeScript + Vite
+# 🎮 Pokémon Wordle (Gen 1 Edition) 🎉
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🌟 Overview
+Pokémon Wordle is a word-guessing game inspired by the classic Wordle, but with a Gen 1 Pokémon twist! 🎩⚡ Players must guess the name of a first-generation Pokémon within 5 attempts. Each guess provides feedback to help narrow down the correct answer. 🧐
 
-Currently, two official plugins are available:
+## 🔥 Features
+- 🕹️ Guess the name of a Gen 1 Pokémon in 5 attempts.
+- 🔍 Feedback system that indicates:
+  - 🎨 **Type color** based on the guessed Pokémon.
+  - 🧬 **Evolution stage** to hint at whether the guessed Pokémon evolves.
+  - ✅ **Correctness**: If the guess is correct, the name becomes green.
+- 🎨 Clean and responsive UI for an enjoyable gameplay experience.
+- 📜 Dynamic game logic with an expanding Gen 1 Pokédex.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Tech Stack
+The game is built using the following technologies:
 
-## Expanding the ESLint configuration
+- 🏗 **TypeScript**: Ensures type safety and improves code maintainability.
+- 💡 **JavaScript**: Used for dynamic scripting where necessary.
+- 🚀 **Node.js**: Backend logic and API handling.
+- ⚛️ **React**: Frontend framework for building interactive UI components.
+- 🏗 **HTML**: Structure of the web application.
+- 🎨 **CSS**: Styling and layout to enhance the user experience.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🏗 Installation
+To run the project locally, follow these steps:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+1. 📥 Clone the repository:
+   ```sh
+   git clone https://github.com/moealatiyat/pokemonwordle.git
+   ```
+2. 📂 Navigate to the project directory:
+   ```sh
+   cd pokemonwordle
+   ```
+3. 📦 Install dependencies:
+   ```sh
+   npm install
+   ```
+4. ▶️ Start the development server:
+   ```sh
+   npm start
+   ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🎮 How to Play
+1. 🔠 Start the game and enter your first guess.
+2. 🕵️ The game will provide hints based on your guess:
+   - 🎨 **Type Color**: Displays the primary type color of the guessed Pokémon.
+   - 🧬 **Evolution Type**: Indicates if the guessed Pokémon is a base form, middle stage, or final evolution.
+   - ✅ **Correctness**: If the guessed Pokémon is correct, the name becomes green.
+3. 🧠 Use the hints to make better guesses within the 5 attempts.
+4. 🏆 Win by correctly guessing the Pokémon's name!
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🤝 Contributing
+Contributions are welcome! If you want to improve the game, feel free to fork the repository, create a new branch, and submit a pull request. 🚀
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+
+---
+🎉 Enjoy playing Pokémon Wordle and test your Gen 1 Pokémon knowledge! ⚡🔥
+
