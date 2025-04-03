@@ -37,12 +37,48 @@ const getPokemonImageUrl = (id: number): string => {
 
 // Function to get evolution stage
 const getEvolutionStage = (pokemon: Pokemon): string => {
-  const baseForms = ['bulbasaur', 'charmander', 'squirtle', 'caterpie', 'weedle', 'pidgey', 'rattata', 'spearow', 'ekans', 'pikachu', 'sandshrew', 'nidoran-f', 'nidoran-m', 'clefairy', 'vulpix', 'jigglypuff', 'oddish', 'meowth', 'psyduck', 'growlithe', 'poliwag', 'machop', 'bellsprout', 'tentacool', 'geodude', 'ponyta', 'slowpoke', 'magnemite', 'farfetchd', 'doduo', 'seel', 'grimer', 'shellder', 'gastly', 'onix', 'drowzee', 'krabby', 'voltorb', 'exeggcute', 'cubone', 'hitmonlee', 'hitmonchan', 'lickitung', 'koffing', 'rhyhorn', 'chansey', 'tangela', 'kangaskhan', 'horsea', 'goldeen', 'staryu', 'mr-mime', 'scyther', 'jynx', 'electabuzz', 'magmar', 'pinsir', 'tauros', 'magikarp', 'lapras', 'ditto', 'eevee', 'porygon', 'omanyte', 'kabuto', 'aerodactyl', 'articuno', 'zapdos', 'moltres', 'dratini', 'mewtwo', 'mew'];
-  const firstEvolutions = ['ivysaur', 'charmeleon', 'wartortle', 'metapod', 'kakuna', 'pidgeotto', 'raticate', 'fearow', 'arbok', 'raichu', 'sandslash', 'nidorina', 'nidorino', 'clefable', 'ninetales', 'wigglytuff', 'gloom', 'persian', 'golduck', 'arcanine', 'poliwhirl', 'machoke', 'weepinbell', 'tentacruel', 'graveler', 'rapidash', 'slowbro', 'magneton', 'dodrio', 'dewgong', 'muk', 'cloyster', 'haunter', 'drowzee', 'krabby', 'voltorb', 'exeggcute', 'cubone', 'hitmonlee', 'hitmonchan', 'lickitung', 'koffing', 'rhyhorn', 'chansey', 'tangela', 'kangaskhan', 'horsea', 'goldeen', 'staryu', 'mr-mime', 'scyther', 'jynx', 'electabuzz', 'magmar', 'pinsir', 'tauros', 'magikarp', 'lapras', 'ditto', 'eevee', 'porygon', 'omanyte', 'kabuto', 'aerodactyl', 'articuno', 'zapdos', 'moltres', 'dratini', 'mewtwo', 'mew'];
+  // Base forms (no evolution)
+  const baseForms = [
+    'bulbasaur', 'charmander', 'squirtle', 'caterpie', 'weedle', 'pidgey', 'rattata', 
+    'spearow', 'ekans', 'pikachu', 'sandshrew', 'nidoran-f', 'nidoran-m', 'clefairy', 
+    'vulpix', 'jigglypuff', 'oddish', 'meowth', 'psyduck', 'growlithe', 'poliwag', 
+    'machop', 'bellsprout', 'tentacool', 'geodude', 'ponyta', 'slowpoke', 'magnemite', 
+    'farfetchd', 'doduo', 'seel', 'grimer', 'shellder', 'gastly', 'onix', 'drowzee', 
+    'krabby', 'voltorb', 'exeggcute', 'cubone', 'hitmonlee', 'hitmonchan', 'lickitung', 
+    'koffing', 'rhyhorn', 'chansey', 'tangela', 'kangaskhan', 'horsea', 'goldeen', 
+    'staryu', 'mr-mime', 'scyther', 'jynx', 'electabuzz', 'magmar', 'pinsir', 'tauros', 
+    'magikarp', 'lapras', 'ditto', 'eevee', 'porygon', 'omanyte', 'kabuto', 'aerodactyl', 
+    'articuno', 'zapdos', 'moltres', 'dratini', 'mewtwo', 'mew'
+  ];
+
+  // First evolutions
+  const firstEvolutions = [
+    'ivysaur', 'charmeleon', 'wartortle', 'metapod', 'kakuna', 'pidgeotto', 'raticate', 
+    'fearow', 'arbok', 'raichu', 'sandslash', 'nidorina', 'nidorino', 'clefable', 
+    'ninetales', 'wigglytuff', 'gloom', 'persian', 'golduck', 'arcanine', 'poliwhirl', 
+    'machoke', 'weepinbell', 'tentacruel', 'graveler', 'rapidash', 'slowbro', 'magneton', 
+    'dodrio', 'dewgong', 'muk', 'cloyster', 'haunter', 'hypno', 'kingler', 'electrode', 
+    'exeggutor', 'marowak', 'rhydon', 'seadra', 'seaking', 'starmie', 'electabuzz', 
+    'magmar', 'pinsir', 'gyarados', 'vaporeon', 'jolteon', 'flareon', 'porygon2', 
+    'omastar', 'kabutops', 'dragonair'
+  ];
+
+  // Final evolutions
+  const finalEvolutions = [
+    'venusaur', 'charizard', 'blastoise', 'butterfree', 'beedrill', 'pidgeot', 'raticate', 
+    'fearow', 'arbok', 'raichu', 'sandslash', 'nidoqueen', 'nidoking', 'clefable', 
+    'ninetales', 'wigglytuff', 'vileplume', 'persian', 'golduck', 'arcanine', 'poliwrath', 
+    'machamp', 'victreebel', 'tentacruel', 'golem', 'rapidash', 'slowbro', 'magneton', 
+    'dodrio', 'dewgong', 'muk', 'cloyster', 'gengar', 'hypno', 'kingler', 'electrode', 
+    'exeggutor', 'marowak', 'rhydon', 'seadra', 'seaking', 'starmie', 'electabuzz', 
+    'magmar', 'pinsir', 'gyarados', 'vaporeon', 'jolteon', 'flareon', 'porygon2', 
+    'omastar', 'kabutops', 'dragonite', 'mewtwo', 'mew'
+  ];
   
   if (baseForms.includes(pokemon.name)) return 'Base';
   if (firstEvolutions.includes(pokemon.name)) return 'First';
-  return 'Final';
+  if (finalEvolutions.includes(pokemon.name)) return 'Final';
+  return 'Base'; // Default case for any Pokemon not in the lists
 };
 
 export const PokemonWordle = () => {
@@ -61,7 +97,6 @@ export const PokemonWordle = () => {
     setTargetPokemon(gen1Pokemon[randomIndex]);
   }, []);
 
-  // Handle input changes and update suggestions
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toLowerCase();
     setCurrentGuess(value);
@@ -72,7 +107,7 @@ export const PokemonWordle = () => {
           pokemon.name.toLowerCase().includes(value) &&
           !guesses.some(guess => guess.name === pokemon.name)
         )
-        .slice(0, 5); // Show only top 5 matches
+        .slice(0, 5); 
       setSuggestions(matches);
       setShowSuggestions(true);
     } else {
@@ -81,13 +116,11 @@ export const PokemonWordle = () => {
     }
   };
 
-  // Handle suggestion click
   const handleSuggestionClick = (pokemon: Pokemon) => {
     setCurrentGuess(pokemon.name);
     setShowSuggestions(false);
   };
 
-  // Handle clicks outside suggestions
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (suggestionsRef.current && !suggestionsRef.current.contains(event.target as Node)) {
