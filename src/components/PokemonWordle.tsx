@@ -4,32 +4,6 @@ import './PokemonWordle.css';
 
 const MAX_ATTEMPTS = 5;
 
-// Add color mapping for Pokemon
-const getPokemonColor = (pokemon: Pokemon): string => {
-  // Define color based on primary type
-  const typeColors: { [key: string]: string } = {
-    fire: '#FF6B6B',
-    water: '#4ECDC4',
-    grass: '#95E1D3',
-    electric: '#FFE66D',
-    psychic: '#FF8B94',
-    ice: '#A8E6CF',
-    dragon: '#FFD3B6',
-    dark: '#2C3E50',
-    fairy: '#FFB5E8',
-    normal: '#D4D4D4',
-    fighting: '#FF6B6B',
-    flying: '#B5EAD7',
-    poison: '#C7CEEA',
-    ground: '#E2F0CB',
-    bug: '#FFDAC1',
-    ghost: '#E6E6FA',
-    rock: '#D4A5A5',
-    steel: '#B8B8D0'
-  };
-  return typeColors[pokemon.type[0]] || '#D4D4D4';
-};
-
 // Function to get Pokemon image URL
 const getPokemonImageUrl = (id: number): string => {
   return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
